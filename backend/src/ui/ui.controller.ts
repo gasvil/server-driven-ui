@@ -11,7 +11,7 @@ export class UIController {
       components: [
         {
           type: 'text',
-          props: [{ value: 'Hello World' }],
+          props: { label: 'Hello World from server' },
         },
       ],
     };
