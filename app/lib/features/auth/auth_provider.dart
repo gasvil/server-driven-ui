@@ -12,6 +12,6 @@ class AuthNotifier extends AsyncNotifier<UiScreen> {
   Future<UiScreen> build() async {
     final uiService = ref.read(uiServiceProvider);
     final useCase = GetAuthScreenUseCase(uiService);
-    return useCase.call();
+    return useCase.call("auth");
   }
 }

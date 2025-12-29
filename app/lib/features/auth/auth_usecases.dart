@@ -8,8 +8,8 @@ class GetAuthScreenUseCase {
 
   GetAuthScreenUseCase(this._service);
 
-  Future<UiScreen> call() async {
-    final response = await _service.getScreen("id");
+  Future<UiScreen> call(String screenId) async {
+    final response = await _service.getScreen(screenId);
     return UiScreen(
       id: response.id,
       layout: Layout.fromString(response.layout),
