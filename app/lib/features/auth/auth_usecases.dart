@@ -1,4 +1,4 @@
-import 'package:app/core/ui/data/ui_service.dart';
+import 'package:app/core/ui/data/service/ui_service.dart';
 import 'package:app/core/ui/domain/enums/layout.dart';
 import 'package:app/core/ui/domain/models/ui_component.dart';
 import 'package:app/core/ui/domain/models/ui_screen.dart';

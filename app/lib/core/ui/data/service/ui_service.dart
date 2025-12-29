@@ -7,7 +7,7 @@ class UiService {
   UiService(this._client);
 
   Future<UiScreenResponse> getScreen(String id) async {
-    final response = await _client.get('/screens/home', {});
+    final response = await _client.get('/screen/home', {});
     return UiScreenResponse.fromJson(response);
   }
 }

@@ -1,17 +1,17 @@
 import 'package:app/core/ui/domain/enums/layout.dart';
 import 'package:app/core/ui/domain/models/ui_screen.dart';
-import 'package:app/core/ui/engine/ui_component_render.dart';
+import 'package:app/core/ui/engine/ui_component_renderer.dart';
 import 'package:flutter/material.dart';
 
-class UiScreenRender extends StatelessWidget {
+class UiScreenRenderer extends StatelessWidget {
   final UiScreen screen;
 
-  const UiScreenRender({super.key, required this.screen});
+  const UiScreenRenderer({super.key, required this.screen});
 
   @override
   Widget build(BuildContext context) {
     final children = screen.components
-        .map((component) => UiComponentRender(component: component))
+        .map((component) => UiComponentRenderer(component: component))
         .toList();
 
     switch (screen.layout) {

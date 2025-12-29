@@ -1,38 +1,17 @@
-import 'dart:async';
-
-import 'package:app/core/http/http_client.dart';
-import 'package:app/core/ui/data/ui_service.dart';
-import 'package:app/core/utils/app_logger.dart';
-import 'package:app/features/auth/auth_state.dart';
+import 'package:app/core/ui/data/service/ui_service_provider.dart';
+import 'package:app/core/ui/domain/models/ui_screen.dart';
 import 'package:app/features/auth/auth_usecases.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
-// final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  // final client = HttpClient();
-  // final service = UiService(client);
+final authProvider = AsyncNotifierProvider<AuthNotifier, UiScreen>(
+  AuthNotifier.new,
+);
 
-  // return AuthNotifier(useCase);
-// });
-
-final authProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(AuthNotifier.new);
-
-class AuthNotifier extends AsyncNotifier<AuthState> {
+class AuthNotifier extends AsyncNotifier<UiScreen> {
   @override
-  FutureOr<AuthState> build() {
-    final service = ref.read(listenable)
+  Future<UiScreen> build() async {
+    final uiService = ref.read(uiServiceProvider);
+    final useCase = GetAuthScreenUseCase(uiService);
+    return useCase.call();
   }
-  // final GetAuthScreenUseCase _useCase;
-
-  // Future<void> loadLoginScreen() async {
-  //   state = state.copyWith(loading: true);
-
-  //   try {
-  //     final screen = await _useCase.execute();
-  //     state = state.copyWith(screen: screen);
-  //     logger.d(state.screen?.id);
-  //   } finally {
-  //     state = state.copyWith(loading: false);
-  //   }
-  // }
 }
