@@ -1,4 +1,5 @@
 import 'package:app/core/ui/domain/models/ui_component.dart';
+import 'package:app/core/ui/engine/components/ui_text.dart';
 import 'package:flutter/material.dart';
 
 class UiComponentRenderer extends StatelessWidget {
@@ -9,8 +10,8 @@ class UiComponentRenderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (component) {
-      case TextComponent(:final value):
-        return Text(value);
+      case TextComponent textComponent:
+        return UiText(component: textComponent);
 
       default:
         return const SizedBox.shrink();
