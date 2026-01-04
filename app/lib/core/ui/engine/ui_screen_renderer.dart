@@ -14,6 +14,10 @@ class UiScreenRenderer extends StatelessWidget {
         .map((component) => UiComponentRenderer(component: component))
         .toList();
 
+    return Container(child: renderLayout(children));
+  }
+
+  Widget renderLayout(List<UiComponentRenderer> children) {
     switch (screen.layout) {
       case Layout.column:
         return Column(

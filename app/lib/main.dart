@@ -1,9 +1,12 @@
 import 'package:app/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MainApp()));
+  runApp(
+    ProviderScope(retry: (retryCount, error) => null, child: const MainApp()),
+  );
 }
 
 class MainApp extends ConsumerWidget {
@@ -15,6 +18,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(textTheme: GoogleFonts.lexendDecaTextTheme()),
     );
   }
 }
