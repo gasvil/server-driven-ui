@@ -1,3 +1,7 @@
+import { PaddingProp } from './props/padding.prop';
+
 export interface PropsSchema {
-  label: string;
+  label?: string;
+  value?: string;
+  padding?: PaddingProp;
 }

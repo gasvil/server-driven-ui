@@ -1,5 +1,5 @@
+import 'package:app/core/state/screen/screen_provider.dart';
 import 'package:app/core/ui/engine/ui_screen_renderer.dart';
-import 'package:app/features/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,15 +9,15 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      // appBar: AppBar(title: const Text('Login')),
       body: Center(child: loginContent(ref)),
     );
   }
 
   Widget loginContent(WidgetRef ref) {
-    final state = ref.watch(authProvider);
+    final state = ref.watch(screenProvider);
     return state.when(
-      data: (screen) => UiScreenRenderer(screen: screen),
+      data: (data) => UiScreenRenderer(screen: data.base),
       error: (_, _) => Text('Error'),
       loading: () => CircularProgressIndicator(),
     );

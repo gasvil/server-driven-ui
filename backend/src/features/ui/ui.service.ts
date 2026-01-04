@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { authResolver } from './resolvers/auth.resolver';
+import { loginScreen } from './screens/login.screen';
 import { notFoundScreen } from './screens/not-found.screen';
+import { signupScreen } from './screens/signup.screen';
 
 @Injectable()
 export class UiService {
   resolveScreen(screenId: string) {
     switch (screenId) {
-      case 'auth':
-        return authResolver();
+      case 'login':
+        return loginScreen();
+      case 'signup':
+        return signupScreen();
       default:
         return notFoundScreen();
     }

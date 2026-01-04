@@ -1,30 +1,29 @@
-import 'dart:convert';
-
 import 'package:app/core/http/http_config.dart';
-import 'package:app/core/http/http_exception.dart';
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
-class HttpClient {
-  final Client _client;
+Dio httpClient() {
+  final dio = Dio(
+    BaseOptions(
+      baseUrl: HttpConfig.baseUrl,
+      connectTimeout: HttpConfig.connectTimeout,
+      receiveTimeout: HttpConfig.receiveTimeout,
+      headers: {'Content-Type': 'application/json'},
+    ),
+  );
 
-  HttpClient({Client? client}) : _client = client ?? Client();
-
-  Future<Map<String, dynamic>> get(
-    String path,
-    Map<String, String> query,
-  ) async {
-    final uri = Uri.parse(
-      '${HttpConfig.baseUrl}$path',
-    ).replace(queryParameters: query);
-
-    final request = Request('GET', uri);
-    final response = await _client.send(request);
-    final body = await response.stream.bytesToString();
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return jsonDecode(body) as Map<String, dynamic>;
-    }
-
-    throw HttpException.fromResponse(response.statusCode, body);
+  if (kDebugMode) {
+    dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: false,
+        responseBody: true,
+        error: true,
+      ),
+    );
   }
+
+  return dio;
 }
